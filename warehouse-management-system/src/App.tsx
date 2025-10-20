@@ -1,0 +1,22 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import InventoryPage from './pages/InventoryPage';
+import ProtectedRoute from './components/ProtectedRoute';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/inventory" element={<InventoryPage />} />
+        </Route>
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
