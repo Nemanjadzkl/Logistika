@@ -1,4 +1,13 @@
 {
+  "builds": [
+    {
+      "src": "warehouse-management-system/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "outputDirectory": "warehouse-management-system/build"
+      }
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
