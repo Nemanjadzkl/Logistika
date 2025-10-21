@@ -36,6 +36,33 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           >
             Inventar
           </NavLink>
+          <NavLink
+            to="/suppliers"
+            className={({ isActive }) =>
+              `block px-4 py-2 mt-2 rounded-md hover:bg-gray-100 ${isActive ? 'bg-gray-200 font-semibold' : ''}`
+            }
+          >
+            Dobavljači
+          </NavLink>
+          <NavLink
+            to="/customers"
+            className={({ isActive }) =>
+              `block px-4 py-2 mt-2 rounded-md hover:bg-gray-100 ${isActive ? 'bg-gray-200 font-semibold' : ''}`
+            }
+          >
+            Kupci
+          </NavLink>
+
+          {/* TODO: Implementirati collapsible meni */}
+          <p className="px-4 mt-4 text-xs font-semibold text-gray-500 uppercase">Porudžbine</p>
+          <NavLink
+            to="/purchase-orders"
+            className={({ isActive }) =>
+              `block px-4 py-2 mt-2 rounded-md hover:bg-gray-100 ${isActive ? 'bg-gray-200 font-semibold' : ''}`
+            }
+          >
+            - Ulazne
+          </NavLink>
         </nav>
       </aside>
 

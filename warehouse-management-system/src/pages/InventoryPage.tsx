@@ -10,6 +10,9 @@ import {
 import useInventoryStore from '../stores/inventoryStore';
 import AddItemDialog from '../components/AddItemDialog';
 
+import { Button } from '../components/ui/button';
+import { Edit } from 'lucide-react';
+
 const InventoryPage = () => {
   const items = useInventoryStore((state) => state.items);
 
@@ -23,11 +26,13 @@ const InventoryPage = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Šifra</TableHead>
+              <TableHead>Šifra</TableHead>
               <TableHead>Naziv</TableHead>
-              <TableHead>Kategorija</TableHead>
-              <TableHead>Jedinica mere</TableHead>
+              <TableHead>Lokacija</TableHead>
+              <TableHead>Rok trajanja</TableHead>
               <TableHead className="text-right">Količina</TableHead>
+              <TableHead className="text-right">Min. zalihe</TableHead>
+              <TableHead className="text-right">Akcije</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -35,9 +40,22 @@ const InventoryPage = () => {
               <TableRow key={item.id}>
                 <TableCell className="font-medium">{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
-                <TableCell>{item.category}</TableCell>
-                <TableCell>{item.unit}</TableCell>
-                <TableCell className="text-right">{item.quantity.toLocaleString('sr-RS')}</TableCell>
+                <TableCell>{item.location}</TableCell>
+                <TableCell>{item.expiryDate ? new Date(item.expiryDate).toLocaleDateString('sr-RS') : '-'}</TableCell>
+                <TableCell className={`text-right ${item.quantity < item.minStock ? 'text-red-500 font-bold' : ''}`}>
+                  {item.quantity.toLocaleString('sr-RS')}
+                </TableCell>
+                <TableCell className="text-right">{item.minStock.toLocaleString('sr-RS')}</TableCell>
+                <TableCell className="text-right">
+                  <AddItemDialog
+                    item={item}
+                    trigger={
+                      <Button variant="ghost" size="icon">
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                    }
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
